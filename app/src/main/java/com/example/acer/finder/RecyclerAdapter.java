@@ -1,44 +1,47 @@
 package com.example.acer.finder;
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static android.R.string.ok;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Created by acer on 27.08.2017.
  */
 
-public class RecyclerActivity extends RecyclerView.Adapter<RecyclerActivity.ViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
 
     ArrayList<Results> list1;
+    ArrayList<InnerDetail> outerDetails;
     Context c;
     RecyclerView rView;
-    MapsActivity mapsActivity;
-    public RecyclerActivity(ArrayList<Results> list1,Context c,RecyclerView rView ,MapsActivity mapsActivity)
+    HospitalListActivity mapsActivity;
+
+    public RecyclerAdapter(ArrayList<Results> list1, ArrayList<InnerDetail>outerDetails, Context c, RecyclerView rView , HospitalListActivity mapsActivity)
     {
         this.list1=list1;
         this.c=c;
         this.rView=rView;
         this.mapsActivity=mapsActivity;
+        this.outerDetails=outerDetails;
 
     }
 
@@ -104,12 +107,31 @@ public class RecyclerActivity extends RecyclerView.Adapter<RecyclerActivity.View
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Results results =list1.get(position);
-        Log.e("tag",results.getName());
-       holder.name.setText(results.getName()
-       );
+        final int listno=position;
+       holder.name.setText(results.getName());
+               Picasso.with(c).load(results.getIcon()).into(holder.photo);
+        holder.address.setText(outerDetails.get(position).getFormatted_address());
+        holder.call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                outerDetails.get(listno).getInternational_phone_number();
 
 
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + outerDetails.get(listno).getInternational_phone_number()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                c.startActivity(intent);
 
+            }
+        });
+
+
+        //if(results.getOpening_hours().open_now)
+        //{
+           // holder.open.setText("open_now");
+        //}
+       // else{
+           // holder.open.setText("closed");
+       // }
 
     }
 
@@ -121,10 +143,18 @@ public class RecyclerActivity extends RecyclerView.Adapter<RecyclerActivity.View
 
     class ViewHolder extends RecyclerView.ViewHolder{
        TextView name;
+        ImageView photo;
+        TextView address;
+        TextView open;
+        ImageView call;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name=(TextView)itemView.findViewById(R.id.name);
+            photo=(ImageView)itemView.findViewById(R.id.photo);
+            address=(TextView)itemView.findViewById(R.id.address);
+            open=(TextView)itemView.findViewById(R.id.open);
+            call=(ImageView)itemView.findViewById(R.id.callh);
 
         }
     }

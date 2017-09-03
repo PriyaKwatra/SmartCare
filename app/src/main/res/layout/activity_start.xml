@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+android:layout_width="match_parent"
+    android:background="#FFF1EBA0"
+
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context="com.example.acer.finder.StartActivity"
+>
+
+<FrameLayout
+    android:layout_marginTop="4dp"
+    android:id="@+id/frameBox"
+    android:layout_width="370dp"
+    android:layout_height="370dp"
+
+
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="8dp">
+</FrameLayout>
+
+<FrameLayout
+    android:id="@+id/frame_layout"
+    android:layout_width="368dp"
+    android:layout_height="501dp"
+    android:background="@color/white_overlay"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="0dp">
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_menu"
+        android:paddingLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        fab:fab_addButtonColorNormal="@color/accent_dark"
+        fab:fab_addButtonColorPressed="#FF428DAB"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_addButtonStrokeVisible="false"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/ChooseButton"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accent_dark"
+            fab:fab_plusIconColor="@color/white"
+
+            fab:fab_icon="@drawable/ic_audiotrack_dark"
+            fab:fab_size="normal"
+            fab:fab_title="Find Doc" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/ChooseButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accent_dark"
+            fab:fab_plusIconColor="@color/white"
+            fab:fab_icon="@drawable/ic_audiotrack_dark"
+            fab:fab_size="normal"
+            fab:fab_title="Track Activities" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/ChooseButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accent_dark"
+            fab:fab_plusIconColor="@color/white"
+
+            fab:fab_icon="@drawable/ic_audiotrack_dark"
+            fab:fab_size="normal"
+            fab:fab_title="Health Tips" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+</FrameLayout>
+</android.support.constraint.ConstraintLayout>
+
