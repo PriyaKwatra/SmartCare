@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.acer.finder.MainActivity">
 
 
@@ -12,7 +13,7 @@
     android:layout_marginLeft="120dp"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
 
@@ -59,6 +60,14 @@
 </LinearLayout>
 
 
+    <android.support.design.widget.FloatingActionButton
+               android:layout_marginBottom="30dp"
+        android:id="@+id/messaged"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_message_black_24dp"
+        app:fabSize="normal"/>
 
 
 

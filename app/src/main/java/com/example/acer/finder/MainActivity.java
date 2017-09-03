@@ -3,12 +3,14 @@ package com.example.acer.finder;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,8 +49,9 @@ implements OnDataPointListener,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener {
     EditText t1;
+    int missing;
     private static ViewPager mPager;
-
+    FloatingActionButton send;
     private static int currentPage = 0;
     private static final Integer[] XMEN= {R.drawable.battary_low,R.drawable.charging,R.drawable.startpic};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
@@ -74,7 +77,21 @@ implements OnDataPointListener,
                data = (TextView)findViewById(R.id.count);
                  t1 = (EditText)findViewById(R.id.target);
             t1.setText("0");
+            send = (FloatingActionButton)findViewById(R.id.messaged);
+                     send.setOnClickListener(new View.OnClickListener(){
+                         @Override
+                         public void onClick(View v) {
 
+
+                             Intent sendIntent = new Intent();
+                             sendIntent.setAction(Intent.ACTION_SEND);
+                             sendIntent.putExtra(Intent.EXTRA_TEXT, "Target set :" + t1.getText().toString() + "Steps taken " + data.getText().toString());
+                             sendIntent.setType("text/plain");
+                             startActivity(sendIntent);
+
+
+                         }
+                     });
             if (savedInstanceState != null) {
                 authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
             }
@@ -225,7 +242,7 @@ implements OnDataPointListener,
 
                                 data.setText(value + "");
 
-                                int missing = Integer.parseInt(t1.getText().toString())-(Integer.parseInt(data.getText().toString()));
+                                missing = Integer.parseInt(t1.getText().toString())-(Integer.parseInt(data.getText().toString()));
                                 if(missing<0)
                                 {
 
